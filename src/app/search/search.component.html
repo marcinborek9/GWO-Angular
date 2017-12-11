@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="row container-search ">
+  <div *ngIf="!search; else forminfo">
+  <form [formGroup]="searchForm" class="row">
+    <h1>wyszukaj podręcznik</h1>
+    <label>wyszukaj:</label>
+    <input [(ngModel)]="name" (ngModelChange)="name" class="container-search__details--input" type="text" formControlName="search"
+    (keyup)="searchTerm$.next($event.target.value)" data-toggle="tooltip" 
+    data-placement="top" title="np. historia">
+    <div class="alert" *ngIf="!searchForm.controls['search'].valid">
+    You must specify a description that's between 3 and 12 characters.
+  </div>
+  </form>
+</div>
+  </div>
+
+  <div class="container">
+  <div class="row container-results">
+    <ul *ngIf="results && searchForm.controls['search'].valid">
+      <li *ngFor="let result of results | paginate: { itemsPerPage: 6, currentPage: p } ">
+        <div class="container-results__frame">
+          <img class="img-responsive container-results__frame--cover" [src]="result['cover']">
+          <div class="container-results__frame--details">
+          <h3> {{ result['title']}}  </h3>
+          <h4> {{ result['author'] }}</h4>
+          <p>nr dopuszczenia MEN: {{ result['men'] }}</p>
+          <p>ISBN: {{ result['isbn'] }}</p>
+          <p>Liczba stron: {{ result['pages_count'] }}</p>
+          <p>Poziom nauczania: {{result['levels'][0]['school']}}, {{result['levels'][0]['class']}}</p>
+          <p>Przedmiot: {{ result['subject'] }}</p>
+          <p>Rodzaj publikacji: {{ result['type'] }}</p>
+          <button class="btn btn-primary"><a class="container-results__frame--details" href="{{ result['url'] }}">Przejdź do księgarni</a></button>
+        </div>
+      </div>
+    </li>
+    <div class="pagination" *ngIf="showPagination === true">
+    <pagination-controls (pageChange)="p = $event" ></pagination-controls>
+  </div>
+  </ul>
+</div>
+</div>
+</div>
+
+
+
+
+
