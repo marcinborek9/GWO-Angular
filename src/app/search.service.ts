@@ -12,7 +12,7 @@ import 'rxjs/add/operator/switchMap'; // zostanie wyrenderowany tylko ostatnio p
 
 @Injectable()
 export class SearchService {
-  apiUrl = 'https://gwo.pl/booksApi/v1/search?query=';
+public apiUrl = 'https://gwo.pl/booksApi/v1/search?query=';
 
 
 

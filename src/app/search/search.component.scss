@@ -17,7 +17,7 @@
     border: 2px solid $light-black;
     border-radius: 200px;
     outline: none;
-    padding: 10px;
+    padding: 20px;
   }
 }
 .container {
@@ -36,6 +36,9 @@
       animation-iteration-count: infinite;
       display: flex;
       background-color: $card-background;
+      .container-results__frame--cover {
+        max-width: 380px;
+      }
       .container-results__frame--details {
         flex-direction: row;
         text-decoration: none;
@@ -43,6 +46,13 @@
         padding: 30px;
         h3, h4, p {
           margin-bottom: 20px;
+        }
+        .details-title {
+          font-weight: bold;
+        }
+        .btn {
+          margin-top: 50px;
+          border: 1px solid $light-black;
         }
       }
     }

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { SearchService } from '../search.service';
-import { Subject } from 'rxjs/Subject';
 import { HttpModule } from '@angular/http';
-
 import { AsyncPipe } from '@angular/common';
 import { NgModel } from '@angular/forms';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Subject } from 'rxjs/Subject';
+import { SearchService } from '../search.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -14,11 +13,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   providers: [SearchService]
 })
 export class SearchComponent {
-public results;
+public results: string;
 public p: number = 1;
 public searchElem: string;
 public validSearch: boolean = false;
-public showPagination;
+public showPagination: boolean;
 public loginErrorMessage: boolean = false;
 public searchTerm$ = new Subject<string>();
 public name: string = '';
@@ -36,7 +35,6 @@ public searchForm: FormGroup;
       this.searchByTerm();
 }
 
-
   searchByTerm() {
     this.searchService.search(this.searchTerm$)
       .subscribe(res => {
@@ -52,5 +50,9 @@ public searchForm: FormGroup;
       err => {
         alert('Coś poszło nie tak!');
       });
+  }
+
+  scrollTop(){
+    window.scrollTo(0, 0);
   }
 }
