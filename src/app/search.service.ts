@@ -5,16 +5,13 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime'; // Opóźnia wysłanie requesta - pomaga w wolnym wpisywaniu w input.
-import 'rxjs/add/operator/distinctUntilChanged'; // wstrzymuje działanie do momentu, aż nie będzie zmiany
-import 'rxjs/add/operator/switchMap'; // zostanie wyrenderowany tylko ostatnio pobrany zestaw danych, także
-                                      // poprzednie żądania zostaną anuluowane
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 @Injectable()
 export class SearchService {
 public apiUrl = 'https://gwo.pl/booksApi/v1/search?query=';
-
-
 
   constructor(private http: Http) { }
 
@@ -39,9 +36,6 @@ public apiUrl = 'https://gwo.pl/booksApi/v1/search?query=';
           });
         } else {
           return Observable.empty();
-
         }
     }
-
-
 }

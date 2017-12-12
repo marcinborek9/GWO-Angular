@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { AsyncPipe } from '@angular/common';
-import { NgModel } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs/Subject';
 import { SearchService } from '../search.service';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -14,24 +12,20 @@ import { SearchService } from '../search.service';
 })
 export class SearchComponent {
 public results: string;
-public p: number = 1;
-public searchElem: string;
-public validSearch: boolean = false;
-public showPagination: boolean;
-public loginErrorMessage: boolean = false;
-public searchTerm$ = new Subject<string>();
 public name: string = '';
+public p: number = 1;
+public showPagination: boolean;
+public searchTerm$ = new Subject<string>();
 public searchForm: FormGroup;
-
-
 
   constructor(
     private searchService: SearchService,
     private fb: FormBuilder) {
 
-    this.searchForm = fb.group({
-      search: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(12)])]
-    });
+      this.searchForm = this.fb.group({
+        search: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(12)])]
+      });
+
       this.searchByTerm();
 }
 
@@ -52,7 +46,7 @@ public searchForm: FormGroup;
       });
   }
 
-  scrollTop(){
+  scrollTop() {
     window.scrollTo(0, 0);
   }
 }

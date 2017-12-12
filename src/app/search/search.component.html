@@ -1,42 +1,48 @@
 <div class="container-fluid">
-  <div class="row container-search ">
-  <form [formGroup]="searchForm" class="row">
-    <h1>wyszukaj podręcznik</h1>
-    <label>Wyszukaj:</label>
-    <input [(ngModel)]="name" (ngModelChange)="name" class="container-search__details--input" type="text" formControlName="search"
-    (keyup)="searchTerm$.next($event.target.value)" data-toggle="tooltip" 
-    data-placement="top" title="np. historia">
-    <div class="alert" *ngIf="!searchForm.controls['search'].valid">
-      Musisz podać opis zawierający od 3 do 12 znaków.
-    </div>
-  </form>
-</div>
-
-<div class="container">
-  <div class="row container-results">
-    <ul *ngIf="results && searchForm.controls['search'].valid">
-      <li *ngFor="let result of results | paginate: { itemsPerPage: 6, currentPage: p } ">
-        <div class="container-results__frame">
-          <img class="img-responsive container-results__frame--cover" [src]="result['cover']">
-          <div class="container-results__frame--details">
-            <h3> {{ result['title']}}  </h3>
-            <h4><span class="details-title">Autorzy: {{ result['author'] }} </span></h4>
-            <p><span class="details-title">Nr dopuszczenia MEN: </span>{{ result['men'] }}</p>
-            <p><span class="details-title">ISBN: </span>{{ result['isbn'] }}</p>
-            <p><span class="details-title">Liczba stron: </span>{{ result['pages_count'] }}</p>
-            <p><span class="details-title">Poziom nauczania: </span>{{result['levels'][0]['school']}}, {{result['levels'][0]['class']}}</p>
-            <p><span class="details-title">Przedmiot: </span>{{ result['subject'] }}</p>
-            <p><span class="details-title">Rodzaj publikacji: </span>{{ result['type'] }}</p>
-            <button class="btn btn-default"><a class="container-results__frame--details" href="{{ result['url'] }}">Przejdź do księgarni</a></button>
+  <div class="container">
+    <div class="row">
+      <div class="container-search col-xs-12">
+        <form [formGroup]="searchForm" class="">
+          <h1>wyszukaj podręcznik</h1>
+          <label class="container-search__label">Wyszukaj:</label>
+          <input class="container-search__details--input" type="text" formControlName="search"
+          (keyup)="searchTerm$.next($event.target.value)" data-toggle="tooltip" 
+          data-placement="top" title="np. historia">
+          <div class="alert" *ngIf="!searchForm.controls['search'].valid">
+            Musisz podać opis zawierający od 3 do 12 znaków.
           </div>
-        </div>
-      </li>
-      <div class="pagination" *ngIf="showPagination === true">
-        <pagination-controls (pageChange)="p = $event"  (click)="scrollTop()"></pagination-controls>
+        </form>
       </div>
-    </ul>
+    </div>
   </div>
-</div>
+
+  <div class="container">
+    <div class="row">
+      <div class="container-results col-xs-12">
+        <ul *ngIf="results && searchForm.controls['search'].valid">
+          <li *ngFor="let result of results | paginate: { itemsPerPage: 6, currentPage: p }">
+            <div class="container-results__frame">
+              <img class="img-responsive container-results__frame--cover" [src]="result['cover']">
+              <div class="container-results__frame--details">
+                <h3> {{ result['title']}}  </h3>
+                <h4><span class="details-title">Autorzy: {{ result['author'] }} </span></h4>
+                <p><span class="details-title">Nr dopuszczenia MEN: </span>{{ result['men'] }}</p>
+                <p><span class="details-title">ISBN: </span>{{ result['isbn'] }}</p>
+                <p><span class="details-title">Liczba stron: </span>{{ result['pages_count'] }}</p>
+                <p><span class="details-title">Poziom nauczania: </span>{{result['levels'][0]['school']}}, {{result['levels'][0]['class']}}</p>
+                <p><span class="details-title">Przedmiot: </span>{{ result['subject'] }}</p>
+                <p><span class="details-title">Rodzaj publikacji: </span>{{ result['type'] }}</p>
+                <button class="btn btn-default"><a class="container-results__frame--details" href="{{ result['url'] }}">Przejdź do księgarni</a></button>
+              </div>
+            </div>
+          </li>
+          <div class="pagination" *ngIf="showPagination === true">
+            <pagination-controls (pageChange)="p = $event"  (click)="scrollTop()"></pagination-controls>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 
